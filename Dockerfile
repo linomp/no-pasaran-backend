@@ -15,20 +15,24 @@ COPY ./app /code/app
 # run server
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile=./app/privkey.pem", "--ssl-certfile=./app/cert.pem"]
 
-# run bash as the default command
-# CMD ["/bin/bash"]
-
 # Reference commands:
 
 # build image
 # docker build -t no-pasaran-backend .
 
-# run container
+# run container:
+# docker run -d --name no-pasaran-backend -p 443:443 no-pasaran-backend
+
+# debugging:
+
+# run bash as the default command
+# CMD ["/bin/bash"]
 
 # HTTP
-# docker run -d --name devtest -p 80:80 no-pasaran-backend
+# docker run -it --name devtest -p 80:80 no-pasaran-backend
 # uvicorn app.main:app --host 0.0.0.0 --port 80
 
 # HTTPS
-# docker run -t --name devtest --mount type=bind,source="/etc/letsencrypt/live/apps.xmp.systems",target=/certs -p 80:80 no-pasaran-backend
-# uvicorn app.main:app --host 0.0.0.0 --port 80 --ssl-keyfile=./app/privkey.pem --ssl-certfile=./app/cert.pem
+# docker run -it --name devtest --mount type=bind,source="/etc/letsencrypt/live/apps.xmp.systems",target=/certs -p 443:443 no-pasaran-backend
+# docker run -it --name devtest -p 443:443 no-pasaran-backend
+# uvicorn app.main:app --host 0.0.0.0 --port 443 --ssl-keyfile=./app/privkey.pem --ssl-certfile=./app/cert.pem
