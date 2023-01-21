@@ -13,10 +13,10 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY ./app /code/app
 
 # run server
-# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--ssl-keyfile", "/certs/privkey.pem", "--ssl-certfile", "/certs/cert.pem"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile=./app/privkey.pem", "--ssl-certfile=./app/cert.pem"]
 
 # run bash as the default command
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]
 
 # Reference commands:
 
@@ -24,9 +24,11 @@ CMD ["/bin/bash"]
 # docker build -t no-pasaran-backend .
 
 # run container
-# docker run -t --name no-pasaran-backend-dev -p 5000:5000 no-pasaran-backend
 
-# docker run -t --name devtest --mount type=bind,source="/etc/letsencrypt/live/apps.xmp.systems",target=/certs -p 5000:5000 no-pasaran-backend
+# HTTP
+# docker run -d --name devtest -p 80:80 no-pasaran-backend
+# uvicorn app.main:app --host 0.0.0.0 --port 80
 
-
-# uvicorn app.main:app --port 80 --ssl-keyfile=./privkey.pem --ssl-certfile=./cert.pem
+# HTTPS
+# docker run -t --name devtest --mount type=bind,source="/etc/letsencrypt/live/apps.xmp.systems",target=/certs -p 80:80 no-pasaran-backend
+# uvicorn app.main:app --host 0.0.0.0 --port 80 --ssl-keyfile=./app/privkey.pem --ssl-certfile=./app/cert.pem
