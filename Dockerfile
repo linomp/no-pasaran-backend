@@ -33,6 +33,5 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "443", "--ssl-key
 # uvicorn app.main:app --host 0.0.0.0 --port 80
 
 # HTTPS
-# docker run -it --name devtest --mount type=bind,source="/etc/letsencrypt/live/apps.xmp.systems",target=/certs -p 443:443 no-pasaran-backend
 # docker run -it --name devtest -p 443:443 no-pasaran-backend
 # uvicorn app.main:app --host 0.0.0.0 --port 443 --ssl-keyfile=./app/privkey.pem --ssl-certfile=./app/cert.pem
