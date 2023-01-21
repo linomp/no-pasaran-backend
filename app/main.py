@@ -1,8 +1,6 @@
-from typing import Union
-
 from fastapi import FastAPI
 
-from fastapi_versioning import VersionedFastAPI, version
+from fastapi_versioning import VersionedFastAPI
 
 from app.controllers import index
 
