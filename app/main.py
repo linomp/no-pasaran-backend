@@ -6,8 +6,10 @@ from fastapi import FastAPI, Request
 
 app = FastAPI()
 
+api_version = "v1"
+api_prefix = f"api/{api_version}"
 
-@app.get("/")
+@app.get(f"api_prefix/")
 async def root(request: Request):
 
     time = datetime.datetime.now(datetime.timezone.utc).isoformat()
