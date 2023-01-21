@@ -1,17 +1,13 @@
-import datetime
-
 from typing import Union
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 
-app = FastAPI()
+from fastapi_versioning import VersionedFastAPI, version
 
-api_version = "v1"
-api_prefix = f"api/{api_version}"
+from app.controllers import index
 
-@app.get(f"api_prefix/")
-async def root(request: Request):
+app = FastAPI(title="no-pasaran-backend", description="Backend for no-pasaran")
 
-    time = datetime.datetime.now(datetime.timezone.utc).isoformat()
+app.include_router(index.router)
 
-    return {"Host": request.client.host, "Timestamp": time}
+app = VersionedFastAPI(app, version_format='{major}', prefix_format='/v{major}', enable_latest=True)
