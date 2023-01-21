@@ -8,3 +8,5 @@ pyvenv.cfg
 share
 
 **/.pytest_cache/
+
+*.pem
