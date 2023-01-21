@@ -12,12 +12,11 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 # copy project
 COPY ./app /code/app
 
-# copy certs
-RUN mkdir /code/certs
-#COPY  /etc/letsencrypt/live/apps.xmp.systems /code/certs
-
 # run server
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--ssl-keyfile", "/certs/privkey.pem", "--ssl-certfile", "/certs/cert.pem"]
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--ssl-keyfile", "/certs/privkey.pem", "--ssl-certfile", "/certs/cert.pem"]
+
+# run bash as the default command
+CMD ["/bin/bash"]
 
 # Reference commands:
 
@@ -26,3 +25,5 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--ssl-ke
 
 # run container
 # docker run -t --name no-pasaran-backend-dev -p 5000:5000 no-pasaran-backend
+
+# docker run -t --name devtest --mount type=bind,source="/etc/letsencrypt/live/apps.xmp.systems",target=/certs -p 5000:5000 no-pasaran-backend
