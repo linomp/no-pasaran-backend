@@ -14,7 +14,7 @@ COPY ./app /code/app
 
 # copy certs
 RUN mkdir /code/certs
-COPY  /etc/letsencrypt/live/apps.xmp.systems /code/certs
+#COPY  /etc/letsencrypt/live/apps.xmp.systems /code/certs
 
 # run server
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--ssl-keyfile", "/certs/privkey.pem", "--ssl-certfile", "/certs/cert.pem"]
