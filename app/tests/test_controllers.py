@@ -7,12 +7,21 @@ from app.main import app
 
 class TestControllers:
 
-    @pytest.mark.parametrize("version_prefix", ["/latest", "/v1"])
-    def test_root(self, version_prefix):
+    def test_redirect(self):
         with TestClient(app) as client:
-            response = client.get(f"{version_prefix}/")
+            # test redirection from "/" to "/health"
+
+            response = client.get(f"/")
+            assert response.status_code == 307
+            assert response.headers["location"] == "/health"
+
+    def test_root(self):
+        with TestClient(app) as client:
+            response = client.get(f"/health")
             assert response.status_code == 200
 
-            resp_body = response.json()
-            assert "Host" in resp_body
-            assert "Timestamp" in resp_body
+            # assert that body contains ServerMetrics fields
+            assert "host" in response.json()
+            assert "timestamp" in response.json()
+            assert "cpu_usage" in response.json()
+            assert "memory_usage" in response.json()
