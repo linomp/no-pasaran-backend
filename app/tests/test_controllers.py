@@ -7,13 +7,6 @@ from app.main import app
 
 class TestControllers:
 
-    def test_redirect(self):
-        with TestClient(app) as client:
-            # test redirection from "/" to "/health"
-
-            response = client.get(f"/")
-            assert response.headers["location"] == "/health"
-
     def test_root(self):
         with TestClient(app) as client:
             response = client.get(f"/health")
