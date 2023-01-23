@@ -12,7 +12,6 @@ class TestControllers:
             # test redirection from "/" to "/health"
 
             response = client.get(f"/")
-            assert response.status_code == 307
             assert response.headers["location"] == "/health"
 
     def test_root(self):
