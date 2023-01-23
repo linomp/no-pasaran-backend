@@ -7,10 +7,10 @@ cp /etc/letsencrypt/live/apps.xmp.systems/privkey.pem app/privkey.pem
 chmod 777 app/cert.pem
 chmod 777 app/privkey.pem
 
-docker container stop no-pasaran-backend
-docker container rm no-pasaran-backend
+docker container stop devtest
+docker container rm devtest
 
 docker image rm no-pasaran-backend
-docker build -t no-pasaran-backend .
+docker build -t no-pasaran-backend -f DockerfileDebug .
 
-docker run -d --name no-pasaran-backend -p 443:443 no-pasaran-backend
+docker run -it --name devtest -p 80:80 no-pasaran-backend
