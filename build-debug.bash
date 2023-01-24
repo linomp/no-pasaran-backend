@@ -12,5 +12,3 @@ docker container rm devtest
 
 docker image rm no-pasaran-backend
 docker build -t no-pasaran-backend -f DockerfileDebug .
-
-docker run -it --name devtest -p 80:80 no-pasaran-backend
