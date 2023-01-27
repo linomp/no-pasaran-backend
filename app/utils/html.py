@@ -74,13 +74,13 @@ def generate_server_status_html(metrics: ServerMetrics) -> str:
         }}
         .secondary{{color: #9c83ff;}}
     </style>
-    <title>😈️ no-pasaran status 😈</title>
+    <title>😈️ pointless-status 😈</title>
 </head>
 <body>
     <div class=wrapper>
         <div class=instance-card>
             <div class=instance-card__cnt>
-                <div class=instance-card__name>😈️ Instance is running! 😈️</div>
+                <div class=instance-card__name>😈️ Server is running! 😈️</div>
                 <div class=instance-card-inf>
                     <div class=instance-card-inf__item>
                         <div class=instance-card-inf__txt>Client: {metrics.host}</div>
