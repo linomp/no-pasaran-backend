@@ -25,6 +25,10 @@ def generate_server_status_html(metrics: ServerMetrics) -> str:
             font-family: 'Open Sans', sans-serif;
             color: #324e63;
         }}
+        a {{
+            color: inherit;
+            text-decoration: inherit;
+        }}
         .wrapper {{
             width: 100%;
             width: 100%;
@@ -74,6 +78,7 @@ def generate_server_status_html(metrics: ServerMetrics) -> str:
         }}
         .secondary{{color: #9c83ff;}}
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>😈️ pointless-status 😈</title>
 </head>
 <body>
@@ -83,24 +88,24 @@ def generate_server_status_html(metrics: ServerMetrics) -> str:
                 <div class=instance-card__name>😈️ Server is running! 😈️</div>
                 <div class=instance-card-inf>
                     <div class=instance-card-inf__item>
-                        <div class=instance-card-inf__txt>Client: {metrics.host}</div>
-                        <div class=instance-card-inf__title> </div>
+                        <div class=instance-card-inf__txt>Client</div>
+                        <div class=instance-card-inf__title>{metrics.host}</div>
                     </div>
                     <div class=instance-card-inf__item>
-                        <div class=instance-card-inf__txt>Time: {format_timestamp(metrics.timestamp)}</div>
-                        <div class=instance-card-inf__title> </div>
+                        <div class=instance-card-inf__txt>Time</div>
+                        <div class=instance-card-inf__title>{format_timestamp(metrics.timestamp)}</div>
                     </div>
                     <div class=instance-card-inf__item>
-                        <div class=instance-card-inf__txt>CPU Usage: {metrics.cpu_usage}</div>
-                        <div class=instance-card-inf__title> </div>
+                        <div class=instance-card-inf__txt>CPU Usage</div>
+                        <div class=instance-card-inf__title>{metrics.cpu_usage}</div>
                     </div>
                     <div class=instance-card-inf__item>
-                        <div class=instance-card-inf__txt>Memory usage: {metrics.memory_usage}</div>
-                        <div class=instance-card-inf__title> </div>
+                        <div class=instance-card-inf__txt>Memory usage</div>
+                        <div class=instance-card-inf__title>{metrics.memory_usage}</div>
                     </div>
                     <div class=instance-card-inf__item>
-                        <div class="instance-card-inf__txt secondary">Powered by DigitalOcean</div>
-                        <div class=instance-card-inf__title> </div>
+                        <div class="instance-card-inf__title secondary"><a href="https://github.com/linomp/pointless-backend" target="_blank"><i class="fab fa-github"></i></a></div>
+                        <div class="instance-card-inf__txt secondary"><a href="/docs" target="_blank">/docs</a></div>
                     </div>
                 </div>
             </div>

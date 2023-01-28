@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from app.controllers import healthcheck
 from fastapi.responses import RedirectResponse
 
-app = FastAPI(title="no-pasaran-backend", description="Backend for no-pasaran")
+app = FastAPI(title="pointless-backend", description="Backend for my Pointless personal site")
 
 app.include_router(healthcheck.router)
 
