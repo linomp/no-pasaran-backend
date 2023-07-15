@@ -1,5 +1,5 @@
 services:
-  nopasaran_backend_https:
+  pointless-backend-https:
     build:
       context: .
       dockerfile: DockerfileHttps
@@ -10,7 +10,7 @@ services:
       - /etc/letsencrypt/live/apps.xmp.systems/privkey.pem:/app/privkey.pem:ro
     restart: always
 
-  nopasaran_backend_http:
+  pointless-backend-http:
     build:
       context: .
       dockerfile: DockerfileHttp
