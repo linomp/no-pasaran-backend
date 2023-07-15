@@ -1,6 +1,8 @@
 services:
   no-pasaran-backend-https:
-    image: no-pasaran-backend-https
+    build:
+      context: .
+      dockerfile: DockerfileHttps
     ports:
       - "443:443"
     volumes:
@@ -8,7 +10,9 @@ services:
       - /etc/letsencrypt/live/apps.xmp.systems/privkey.pem:/app/privkey.pem
     restart: always
   no-pasaran-backend-http:
-    image: no-pasaran-backend-http
+    build:
+      context: .
+      dockerfile: DockerfileHttp
     ports:
       - "80:80"
     restart: always
