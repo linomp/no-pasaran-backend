@@ -8,11 +8,11 @@ services:
     volumes:
       - /etc/letsencrypt/live/apps.xmp.systems/cert.pem:/app/cert.pem
       - /etc/letsencrypt/live/apps.xmp.systems/privkey.pem:/app/privkey.pem
-    restart: always
+    #restart: always
   no-pasaran-backend-http:
     build:
       context: .
       dockerfile: DockerfileHttp
     ports:
       - "80:80"
-    restart: always
+    #restart: always
