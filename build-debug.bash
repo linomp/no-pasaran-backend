@@ -10,5 +10,7 @@ git pull
 docker container stop devtest
 docker container rm devtest
 
-docker image rm no-pasaran-backend
-docker build -t no-pasaran-backend -f DockerfileDebug .
+docker image rm pointless-backend-debug
+docker build -t pointless-backend-debug -f DockerfileDebug .
+
+docker run -it --name devtest -p 8080:8080 -p 8443:8443 -v /etc/letsencrypt/live/apps.xmp.systems:/app/certs:ro pointless-backend-debug
