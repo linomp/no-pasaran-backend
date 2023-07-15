@@ -6,7 +6,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - /etc/letsencrypt/live/apps.xmp.systems:/code/certs:ro
+      - /etc/letsencrypt/live/apps.xmp.systems:/code/app/certs:ro
     restart: always
 
   http:
