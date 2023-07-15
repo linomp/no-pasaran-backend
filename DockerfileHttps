@@ -14,3 +14,7 @@ COPY ./app /code/app
 
 # run server
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile=./certs/privkey.pem", "--ssl-certfile=./certs/cert.pem"]
+
+# "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile=./certs/privkey.pem", "--ssl-certfile=./certs/cert.pem"
+# make it a bash command
+# uvicorn app.main:app --host --port 443 --ssl-keyfile=./certs/privkey.pem --ssl-certfile=./certs/cert.pem

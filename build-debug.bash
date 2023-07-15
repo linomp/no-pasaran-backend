@@ -13,4 +13,4 @@ docker container rm devtest
 docker image rm pointless-backend-debug
 docker build -t pointless-backend-debug -f DockerfileDebug .
 
-docker run -it --name devtest -p 8080:8080 -p 8443:8443 -v /etc/letsencrypt/live/apps.xmp.systems:/code/app/certs:ro pointless-backend-debug
+docker run -it --name devtest -p 8080:8080 -p 8443:8443 -v /etc/letsencrypt/archive/apps.xmp.systems:/code/app/certs:ro pointless-backend-debug
