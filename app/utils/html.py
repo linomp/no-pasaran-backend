@@ -104,7 +104,7 @@ def generate_server_status_html(metrics: ServerMetrics) -> str:
                         <div class=instance-card-inf__title>{metrics.memory_usage}</div>
                     </div>
                     <div class=instance-card-inf__item>
-                        <div class="instance-card-inf__title secondary"><a href="https://github.com/linomp/pointless-backend" target="_blank"><i class="fab fa-github"></i></a></div>
+                        <div class="instance-card-inf__title secondary"><a href="https://github.com/linomp" target="_blank"><i class="fab fa-github"></i></a></div>
                         <div class="instance-card-inf__txt secondary"><a href="/docs" target="_blank">/docs</a></div>
                     </div>
                 </div>
