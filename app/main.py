@@ -1,18 +1,18 @@
-import os
-
 from fastapi import FastAPI
-
-from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.routers import healthcheck
+
 app = FastAPI(title="pointless-backend", description="Backend for my Pointless personal site")
 
 app.include_router(healthcheck.router)
 
 origins = [
     "https://pointless.xmp.systems",
-    "http://localhost:3000",
+    "https://apps.xmp.systems:8001",
+    "https://apps.xmp.systems:443",
+    "http://apps.xmp.systems:80",
 ]
 
 app.add_middleware(

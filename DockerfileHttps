@@ -1,6 +1,6 @@
 # Source: https://fastapi.tiangolo.com/deployment/docker/#build-a-docker-image-for-fastapi
 
-FROM python:3.10
+FROM python:3.11
 
 # set work directory
 WORKDIR /code

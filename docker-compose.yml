@@ -1,18 +1,18 @@
 services:
-  https:
-    build:
-      context: .
-      dockerfile: DockerfileHttps
-    ports:
-      - "443:443"
-    volumes:
-      - /etc/letsencrypt/archive/apps.xmp.systems:/code/app/certs:ro
-    restart: always
+  #  https:
+  #    build:
+  #      context: .
+  #      dockerfile: DockerfileHttps
+  #    ports:
+  #      - "443:443"
+  #    volumes:
+  #      - /etc/letsencrypt/archive/apps.xmp.systems:/code/app/certs:ro
+  #    restart: always
 
   http:
     build:
       context: .
       dockerfile: DockerfileHttp
     ports:
-      - "80:80"
+      - "8001:8001"
     restart: always
