@@ -1,3 +1,3 @@
 ﻿# pointless-backend
 
-[![CI](https://github.com/linomp/no-pasaran-backend/actions/workflows/build-test.yml/badge.svg)](https://github.com/linomp/no-pasaran-backend/actions/workflows/build-test.yml)
+[![CI](https://github.com/linomp/pointless-backend/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/linomp/pointless-backend/actions/workflows/build.yml)
