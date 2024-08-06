@@ -1,20 +1,31 @@
 package main
 
 import (
+	"log"
 	"net/http"
 )
 
-func GenerateServerStatusHTML(r *http.Request) string {
-	metrics := getStatus(r)
-	return generateServerStatusHTML(metrics)
+type metricsHandler struct {
+}
+
+func (h *metricsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "application/json")
+	switch {
+	case r.Method == http.MethodGet:
+		metrics := getStatus(r)
+		html := generateServerStatusHTML(metrics)
+		w.Header().Set("Content-Type", "text/html")
+		w.Write([]byte(html))
+		return
+	default:
+		return
+	}
 }
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		html := GenerateServerStatusHTML(r)
-		w.Header().Set("Content-Type", "text/html")
-		w.Write([]byte(html))
-	})
+	mux := http.NewServeMux()
 
-	http.ListenAndServe(":8001", nil)
+	mux.Handle("/", &metricsHandler{})
+
+	log.Fatal(http.ListenAndServe("0.0.0.0:8001", mux))
 }
