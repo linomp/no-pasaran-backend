@@ -21,4 +21,4 @@ jobs:
     - name: Build
       run: cd src
           | go mod tidy
-          | go build -v *.go
+          | go build -v
