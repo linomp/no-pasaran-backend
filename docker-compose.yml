@@ -2,7 +2,7 @@ services:
   http:
     build:
       context: .
-      dockerfile: DockerfileHttp
+      dockerfile: Dockerfile
     ports:
       - "8001:8001"
     restart: always
