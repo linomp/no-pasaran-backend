@@ -1,16 +1,1 @@
-# created by virtualenv automatically
-Lib
-Scripts
-include
-lib
-local
-pyvenv.cfg
-share
-
-**/.pytest_cache/
-
-*.pem
-*.env
-
-
-**/__pycache__
+*.exe

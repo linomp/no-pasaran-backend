@@ -5,16 +5,17 @@ import (
 	"net/http"
 )
 
-type healthcheckHandler struct{}
+type metricsHandler struct {
+}
 
-func (h *healthcheckHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("content-type", "text/plain")
-
+func (h *metricsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "application/json")
 	switch {
 	case r.Method == http.MethodGet:
-		msg := []byte("hello there")
-		w.WriteHeader(http.StatusOK)
-		w.Write(msg)
+		metrics := getStatus(r)
+		html := generateServerStatusHTML(metrics)
+		w.Header().Set("Content-Type", "text/html")
+		w.Write([]byte(html))
 		return
 	default:
 		return
@@ -23,7 +24,8 @@ func (h *healthcheckHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	mux := http.NewServeMux()
-	mux.Handle("/", &healthcheckHandler{})
+
+	mux.Handle("/", &metricsHandler{})
 
 	log.Fatal(http.ListenAndServe("0.0.0.0:8001", mux))
 }
