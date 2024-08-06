@@ -1,29 +1,20 @@
 package main
 
 import (
-	"log"
 	"net/http"
 )
 
-type healthcheckHandler struct{}
-
-func (h *healthcheckHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("content-type", "text/plain")
-
-	switch {
-	case r.Method == http.MethodGet:
-		msg := []byte("hello there")
-		w.WriteHeader(http.StatusOK)
-		w.Write(msg)
-		return
-	default:
-		return
-	}
+func GenerateServerStatusHTML(r *http.Request) string {
+	metrics := getStatus(r)
+	return generateServerStatusHTML(metrics)
 }
 
 func main() {
-	mux := http.NewServeMux()
-	mux.Handle("/", &healthcheckHandler{})
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		html := GenerateServerStatusHTML(r)
+		w.Header().Set("Content-Type", "text/html")
+		w.Write([]byte(html))
+	})
 
-	log.Fatal(http.ListenAndServe("0.0.0.0:8001", mux))
+	http.ListenAndServe(":8001", nil)
 }

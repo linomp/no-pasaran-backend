@@ -4,4 +4,8 @@ WORKDIR /app
 
 COPY ./src /app
 
-CMD ["go", "run", "main.go"]
+RUN go mod tidy
+
+RUN go build -o main main.go utils.go
+
+CMD ["./main"]
