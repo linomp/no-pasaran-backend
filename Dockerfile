@@ -6,6 +6,6 @@ COPY ./src /app
 
 RUN go mod tidy
 
-RUN go build -o main main.go utils.go
+RUN go build -o main
 
 CMD ["./main"]
