@@ -21,10 +21,10 @@ import (
 var googleOauthConfig *oauth2.Config
 
 type User struct {
-	ID            string `json:"id"`
-	Email         string `json:"email"`
-	VerifiedEmail bool   `json:"verified_email"`
-	Picture       string `json:"picture"`
+	Id              string `json:"id"`
+	Email           string `json:"email"`
+	IsEmailVerified bool   `json:"verified_email"`
+	Picture         string `json:"picture"`
 }
 
 func init() {
@@ -35,7 +35,7 @@ func init() {
 
 	// Initialize the OAuth2 config once during package initialization
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:8001/google-oauth-callback",
+		RedirectURL:  fmt.Sprintf("http://%s:%s/google-oauth-callback", os.Getenv("HOST"), os.Getenv("PORT")),
 		ClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
 		ClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
 		Scopes: []string{
@@ -135,12 +135,13 @@ func getAsHtml(userData []byte) (string, error) {
 
 	<div class="user-info">
 	    <h1>Oauth2 Demo</h1>	
+		<h2>Google sign-in succesful!</h2>
 		<div class="item">
-			<label>ID:</label>
+			<label>Email:</label>
 			<span>%s</span>
 		</div>
 		<div class="item">
-			<label>Email:</label>
+			<label>Google user ID:</label>
 			<span>%s</span>
 		</div>
 		<div class="item">
@@ -154,7 +155,7 @@ func getAsHtml(userData []byte) (string, error) {
 
 	</body>
 	</html>
-	`, user.ID, user.Email, user.VerifiedEmail, user.Picture)
+	`, user.Email, user.Id, user.IsEmailVerified, user.Picture)
 
 	return html, nil
 }
