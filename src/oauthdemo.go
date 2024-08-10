@@ -35,7 +35,7 @@ func init() {
 
 	// Initialize the OAuth2 config once during package initialization
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  fmt.Sprintf("http://%s:%s/google-oauth-callback", os.Getenv("HOST"), os.Getenv("PORT")),
+		RedirectURL:  fmt.Sprintf("http://%s/google-oauth-callback", os.Getenv("BASE_URL")),
 		ClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
 		ClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
 		Scopes: []string{

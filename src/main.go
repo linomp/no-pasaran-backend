@@ -36,7 +36,7 @@ func main() {
 		w.Write([]byte(html))
 	})
 
-	log.Printf("Running on http://%s:%s\n", os.Getenv("HOST"), os.Getenv("PORT"))
-	log.Printf("Try oauth demo on http://%s:%s/oauthdemo\n", os.Getenv("HOST"), os.Getenv("PORT"))
+	log.Printf("Running on http://%s\n", os.Getenv("BASE_URL"))
+	log.Printf("Try oauth demo on http://%s/oauthdemo\n", os.Getenv("BASE_URL"))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", os.Getenv("PORT")), mux))
 }
