@@ -5,8 +5,4 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-// maximum application buffer
-#define APP_MAX_BUFFER 1024
-#define PORT 8080
-
 int main() { return 0; }
