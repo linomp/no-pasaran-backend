@@ -1,8 +1,8 @@
 FROM golang:bookworm
 
-WORKDIR /app
+WORKDIR /go_server
 
-COPY ./src /app
+COPY . /go_server
 
 RUN go mod tidy
 
