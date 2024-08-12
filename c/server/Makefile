@@ -24,6 +24,9 @@ $(TARGET): $(SRC)
 run: $(TARGET)
 	./$(TARGET)
 
+cleanrun: $(TARGET)
+	make clean && make && ./$(TARGET)
+
 # Clean step to remove the executable
 clean:
 	rm -f $(TARGET)
