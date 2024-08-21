@@ -3,7 +3,7 @@ version: '3.8'
 services:
   go-server:
     build:
-      context: ./go
+      context: ./src
       dockerfile: Dockerfile
     ports:
       - "8001:8001"
