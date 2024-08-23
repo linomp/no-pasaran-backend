@@ -12,7 +12,7 @@ all: $(TARGETS)
 clean:
 	rm -f $(TARGETS)
 
-pristine: clean
+pristine: clean all
 
 %: %.c
 	$(CC) $(CCOPTS) -o $@ $< $(LIBS)
