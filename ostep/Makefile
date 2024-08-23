@@ -10,7 +10,7 @@ TARGETS=$(SRCS:.c=)
 all: $(TARGETS)
 
 clean:
-	rm -f $(TARGETS)
+	rm -f $(TARGETS) & rm -f *.output
 
 pristine: clean all
 
