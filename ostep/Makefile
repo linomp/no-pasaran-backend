@@ -5,14 +5,14 @@ LIBS=
 SRCS=$(wildcard *.c)
 TARGETS=$(SRCS:.c=)
 
-.PHONY: all clean pristine
+.PHONY: all clean new
 
 all: $(TARGETS)
 
 clean:
-	rm -f $(TARGETS) & rm -f *.output
+	rm -f *.bin
 
-pristine: clean all
+new: clean all
 
 %: %.c
-	$(CC) $(CCOPTS) -o $@ $< $(LIBS)
+	$(CC) $(CCOPTS) -o $@.bin $< $(LIBS)
