@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Oauth2 Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .user-info {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .user-info img {
+            max-width: 100px;
+            border-radius: 50%;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .user-info .item {
+            margin-bottom: 10px;
+        }
+        .user-info .item label {
+            font-weight: bold;
+        }
+        .user-info .item span {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="user-info">
+    <h1>Oauth2 Demo</h1>
+    <h2>Google sign-in successful!</h2>
+    <div class="item">
+        <label>Email:</label>
+        <span>{{.Email}}</span>
+    </div>
+    <div class="item">
+        <label>Google user ID:</label>
+        <span>{{.Id}}</span>
+    </div>
+    <div class="item">
+        <label>Verified Email:</label>
+        <span>{{.IsEmailVerified}}</span>
+    </div>
+    <div class="item">
+        <img src="{{.PictureUrl}}" alt="User Picture">
+    </div>
+</div>
+
+</body>
+</html>

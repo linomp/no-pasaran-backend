@@ -5,9 +5,11 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io"
 	"log"
 	"net/http"
@@ -24,7 +26,7 @@ type User struct {
 	Id              string `json:"id"`
 	Email           string `json:"email"`
 	IsEmailVerified bool   `json:"verified_email"`
-	Picture         string `json:"picture"`
+	PictureUrl      string `json:"picture"`
 }
 
 func init() {
@@ -69,7 +71,9 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed getting user info: %s", err.Error())
 	}
-	defer response.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(response.Body)
 
 	// Read the response body
 	contents, err := io.ReadAll(response.Body)
@@ -88,74 +92,19 @@ func getAsHtml(userData []byte) (string, error) {
 	var user User
 	err := json.Unmarshal(userData, &user)
 	if err != nil {
-		return "", fmt.Errorf("failed to unmarshal user data: %s", err.Error())
+		return "<div>Oauth error!</div>", fmt.Errorf("failed to unmarshal user data: %s", err.Error())
 	}
 
-	html := fmt.Sprintf(`
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>My Oauth2 Demo</title>
-		<style>
-			body {
-				font-family: Arial, sans-serif;
-				margin: 20px;
-				padding: 0;
-				background-color: #f4f4f4;
-			}
-			.user-info {
-				background-color: #fff;
-				border: 1px solid #ddd;
-				padding: 20px;
-				border-radius: 8px;
-				max-width: 400px;
-				margin: auto;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-			}
-			.user-info img {
-				max-width: 100px;
-				border-radius: 50%%;
-				display: block;
-				margin-bottom: 20px;
-			}
-			.user-info .item {
-				margin-bottom: 10px;
-			}
-			.user-info .item label {
-				font-weight: bold;
-			}
-			.user-info .item span {
-				margin-left: 10px;
-			}
-		</style>
-	</head>
-	<body>
+	t, err := template.ParseFiles("./templates/oauth_demo.html")
+	if err != nil {
+		return "<div>Error executing oauth_demo template!</div>", err
+	}
 
-	<div class="user-info">
-	    <h1>Oauth2 Demo</h1>	
-		<h2>Google sign-in succesful!</h2>
-		<div class="item">
-			<label>Email:</label>
-			<span>%s</span>
-		</div>
-		<div class="item">
-			<label>Google user ID:</label>
-			<span>%s</span>
-		</div>
-		<div class="item">
-			<label>Verified Email:</label>
-			<span>%t</span>
-		</div>
-		<div class="item">
-			<img src="%s" alt="User Picture">
-		</div>
-	</div>
+	var tpl bytes.Buffer
+	err = t.Execute(&tpl, user)
+	if err != nil {
+		return "<div>Error executing oauth_demo template!</div>", err
+	}
 
-	</body>
-	</html>
-	`, user.Email, user.Id, user.IsEmailVerified, user.Picture)
-
-	return html, nil
+	return tpl.String(), nil
 }

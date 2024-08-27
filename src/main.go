@@ -23,17 +23,31 @@ func main() {
 
 	mux.HandleFunc("GET /google-oauth-callback", func(w http.ResponseWriter, r *http.Request) {
 		data, _ := getUserDataFromGoogle(r.FormValue("code"))
-		html, _ := getAsHtml(data)
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+
+		html, err := getAsHtml(data)
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
 
 		w.Header().Set("Content-Type", "text/html")
-		w.Write([]byte(html))
+
+		_, _ = w.Write([]byte(html))
 	})
 
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		metrics := getStatus(r)
-		html := generateServerStatusHTML(metrics)
+		html, err := generateServerStatusHTML(metrics)
+		if err != nil {
+			log.Println(err.Error())
+		}
+
 		w.Header().Set("Content-Type", "text/html")
-		w.Write([]byte(html))
+		_, _ = w.Write([]byte(html))
 	})
 
 	log.Printf("Running on %s\n", os.Getenv("BASE_URL"))
