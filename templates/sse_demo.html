@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE Demo</title>
+</head>
+<body>
+<h1>SSE Demo</h1>
+<p>Data from server:
+    <span id="sse-data-display">...</span>
+</p>
+</body>
+
+<script>
+    const eventSource = new EventSource('http://localhost:8080/events')
+    const dataDisplay = document.getElementById("sse-data-display")
+
+    eventSource.onmessage = function (event) {
+       console.log('Message received: ', event.data)
+       dataDisplay.innerText = event.data
+    }
+
+    eventSource.onerror = function (event) {
+        console.error('An error occurred:', event)
+    }
+</script>
+</html>
