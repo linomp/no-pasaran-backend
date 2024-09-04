@@ -29,3 +29,5 @@ func main() {
 		log.Fatal(err.Error())
 	}
 }
+
+// TODO: turn this into a controller route and send back the template while on another thread (routine? start sending the events)
